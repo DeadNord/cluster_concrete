@@ -91,23 +91,23 @@ class DataPreprocessor:
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=test_size, random_state=random_state
             )
-            # Update numeric and categorical features based on X_train
-            self.numeric_features = X_train.select_dtypes(
-                include=[np.number]
-            ).columns.tolist()
-            self.categorical_features = X_train.select_dtypes(
-                include=[object, "category"]
-            ).columns.tolist()
             return X_train, X_test, y_train, y_test
         else:
-            # Update numeric and categorical features based on X
-            self.numeric_features = X.select_dtypes(
-                include=[np.number]
-            ).columns.tolist()
-            self.categorical_features = X.select_dtypes(
-                include=[object, "category"]
-            ).columns.tolist()
             return X, y
+
+    def initialize_features(self, X):
+        """
+        Initializes the numeric and categorical feature lists based on the given DataFrame.
+
+        Parameters
+        ----------
+        X : pd.DataFrame
+            The DataFrame to analyze for features.
+        """
+        self.numeric_features = X.select_dtypes(include=[np.number]).columns.tolist()
+        self.categorical_features = X.select_dtypes(
+            include=[object, "category"]
+        ).columns.tolist()
 
     def remove_target(self, target_column):
         """
