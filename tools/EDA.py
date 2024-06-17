@@ -4,6 +4,7 @@ from sklearn.feature_selection import mutual_info_regression
 import numpy as np
 import seaborn as sns
 from IPython.display import display
+from sklearn.inspection import permutation_importance
 from yellowbrick.cluster import KElbowVisualizer
 from sklearn.cluster import KMeans
 
